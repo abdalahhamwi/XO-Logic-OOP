@@ -19,3 +19,24 @@ class Player:
                 break
             print("Invalid symbol. please choose a single letters.")
             
+class Menu:
+    def display_main_menu(self):
+        while True :
+            print("Welcome to X-O Game!")
+            print("1. Start Game")
+            print("2. Quit Game")
+            choice = input("Enter your choice (1 or 2): ")
+            if choice == "1" or choice == "2":
+             return choice
+            break
+        print("Invalid choice. Please enter 1 or 2.")
+        
+    def display_endgame_menu(self):
+        while True:
+            print("Game Over!")
+            print("1. Restart Game")
+            print("2. Quit Game")
+            choice = input("Enter your choice (1 or 2): ")
+            if choice == "1" or choice == "2":
+                return choice
+            print("Invalid choice. Please enter 1 or 2.")
