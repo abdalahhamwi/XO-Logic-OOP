@@ -40,3 +40,56 @@ class Menu:
             if choice == "1" or choice == "2":
                 return choice
             print("Invalid choice. Please enter 1 or 2.")
+            
+class Board:
+    def __init__(self):
+        self.board = [str(i) for i in range(1, 10)]
+        
+    def display_board(self):
+        for i in range(0, 9, 3):
+            print(" | ".join(self.board[i:i+3]))
+            if i < 6:
+                print("-" * 5)
+                
+    def update_board(self, choice, symbol): 
+        if self.is_vaild_move (choice):
+            self.board[choice-1] = symbol
+            return True
+        return False
+                
+    def is_vaild_move(self, choice):
+      return self.board[choice-1].isdigit()
+      
+    def rest_board(self):
+        self.board = [str(i) for i in range(1, 10)]
+          
+class Game:
+    def __init__(self):
+        self.player = [ Player(), Player() ]
+        self.board = Board()
+        self.menu = Menu()
+        self.current_player_index = 0
+        
+    def start_game(self):
+            choice = self.menu.display_main_menu()
+            if choice == "1":
+                self.setup_players()
+                self.play_game()
+            else:
+               self.quit_game()
+               
+    def setup_players(self):
+        for number, player in enumerate(self.player, start=1):
+            print(f"Player {number}, Enter your details:.")
+            player.choose_name()
+            player.choose_symbol()
+            
+    def play_game(self):
+        while True:
+            self.play_turn()
+            if self.check_winner() or self.check_draw():
+              choice = self.menu.display_endgame_menu()
+              if choice == "1":
+                  self.restart_game()
+              else:
+                  self.quit_game()
